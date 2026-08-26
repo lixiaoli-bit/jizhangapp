@@ -387,7 +387,7 @@ h1::before { content: '✨ '; }
 .empty { text-align: center; color: #b5a8c4; padding: 20px 0; font-size: 0.9rem; }
 
 /* ============================================================
-   手机适配（宽度 < 768px）- 备用方案：scale + 宽度补偿
+   手机适配（宽度 < 768px）- 饼图再缩小
    ============================================================ */
 @media (max-width: 768px) {
   body { padding: 4px; }
@@ -396,7 +396,7 @@ h1::before { content: '✨ '; }
     border-radius: 16px;
     transform: scale(0.92);
     transform-origin: top center;
-    width: 108.7%;  /* 1 / 0.92 ≈ 108.7%，补偿缩放后的空白 */
+    width: 108.7%;
   }
   h1 { font-size: 1.2rem; }
   
@@ -418,11 +418,13 @@ h1::before { content: '✨ '; }
   
   .pie-toggle button { font-size: 0.75rem; padding: 5px 12px; }
   
+  /* 饼图缩小（只缩小饼图，文字不变） */
   .pie-container .recharts-wrapper {
-    transform: scale(0.85);
+    transform: scale(0.55);
     transform-origin: center center;
   }
   
+  /* 文字大小保持不变 */
   .legend-item { font-size: 12px; gap: 4px; }
   .legend-color { width: 10px; height: 10px; }
   .legend-percent { font-size: 11px; }
@@ -440,14 +442,14 @@ h1::before { content: '✨ '; }
 }
 
 /* ============================================================
-   小屏手机（宽度 < 420px）- 备用方案：scale + 宽度补偿
+   小屏手机（宽度 < 420px）- 饼图再缩小
    ============================================================ */
 @media (max-width: 420px) {
   .app { 
     transform: scale(0.88);
     transform-origin: top center;
     padding: 10px;
-    width: 113.6%;  /* 1 / 0.88 ≈ 113.6% */
+    width: 113.6%;
   }
   .stats { grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
   .stat-card .value { font-size: 0.8rem; }
@@ -458,11 +460,13 @@ h1::before { content: '✨ '; }
   
   .pie-toggle button { font-size: 0.65rem; padding: 4px 8px; }
   
+  /* 饼图再缩小（只缩小饼图，文字不变） */
   .pie-container .recharts-wrapper {
-    transform: scale(0.75);
+    transform: scale(0.45);
     transform-origin: center center;
   }
   
+  /* 文字大小保持不变 */
   .legend-item { font-size: 11px; gap: 4px; }
   .legend-color { width: 9px; height: 9px; }
   .legend-percent { font-size: 10px; }
@@ -482,12 +486,12 @@ h1::before { content: '✨ '; }
 }
 
 /* ============================================================
-   平板（宽度 768px - 1024px）
+   平板（宽度 768px - 1024px）- 饼图缩小
    ============================================================ */
 @media (min-width: 768px) and (max-width: 1024px) {
   .pie-wrapper { max-width: 360px; }
   .pie-container .recharts-wrapper {
-    transform: scale(0.9);
+    transform: scale(0.65);
     transform-origin: center center;
   }
 }
