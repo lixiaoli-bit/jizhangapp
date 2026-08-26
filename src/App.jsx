@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recha
 import './App.css'
 
 // ====== 预设分类 ======
-const CATEGORIES = ['餐饮', '交通', '购物', '工资', '娱乐', '投资', '其他']
+const CATEGORIES = ['餐饮1', '交通', '购物', '工资', '娱乐', '投资', '其他']
 
 // ====== 柔雾莫兰迪色系 ======
 const COLORS = [
