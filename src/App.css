@@ -199,7 +199,6 @@ h1::before { content: '✨ '; }
   font-size: 0.85rem;
 }
 
-/* ====== 饼图容器（固定尺寸 + 手机缩放） ====== */
 .pie-container {
   display: flex;
   justify-content: center;
@@ -212,7 +211,6 @@ h1::before { content: '✨ '; }
   height: auto !important;
 }
 
-/* ====== 饼图切换开关 ====== */
 .pie-toggle {
   display: flex;
   justify-content: center;
@@ -249,7 +247,6 @@ h1::before { content: '✨ '; }
   background: rgba(184, 165, 214, 0.1);
 }
 
-/* ====== 自定义图例样式 ====== */
 .legend-list {
   display: flex;
   flex-wrap: wrap;
@@ -263,13 +260,13 @@ h1::before { content: '✨ '; }
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: 12px;
   color: #4a3a5e;
 }
 .legend-color {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border-radius: 3px;
   flex-shrink: 0;
 }
@@ -279,7 +276,7 @@ h1::before { content: '✨ '; }
 .legend-percent {
   font-weight: 600;
   color: #8a7a9e;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .form-area { 
@@ -420,10 +417,11 @@ h1::before { content: '✨ '; }
     transform-origin: center center;
   }
   
-  .legend-item { font-size: 10px; gap: 3px; }
-  .legend-color { width: 8px; height: 8px; }
-  .legend-percent { font-size: 9px; }
-  .legend-list { gap: 4px 10px; }
+  /* 图例字变大 */
+  .legend-item { font-size: 12px; gap: 4px; }
+  .legend-color { width: 10px; height: 10px; }
+  .legend-percent { font-size: 11px; }
+  .legend-list { gap: 6px 14px; }
   
   .transaction-form { padding: 12px; }
   .transaction-form h3 { font-size: 0.85rem; margin-bottom: 8px; }
@@ -454,10 +452,11 @@ h1::before { content: '✨ '; }
     transform-origin: center center;
   }
   
-  .legend-item { font-size: 9px; }
-  .legend-color { width: 7px; height: 7px; }
-  .legend-percent { font-size: 8px; }
-  .legend-list { gap: 3px 8px; }
+  /* 小屏手机图例字也变大 */
+  .legend-item { font-size: 11px; gap: 4px; }
+  .legend-color { width: 9px; height: 9px; }
+  .legend-percent { font-size: 10px; }
+  .legend-list { gap: 4px 10px; }
   
   .toolbar input[type="month"] { font-size: 0.65rem; min-width: 80px; }
   .toolbar label { font-size: 0.65rem; }

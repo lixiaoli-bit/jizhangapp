@@ -119,7 +119,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>💰 豪华记账本</h1>
+      <h1>💰 阿少记账本</h1>
       
       <div className="toolbar">
         <input type="month" value={month} onChange={e => setMonth(e.target.value)} />
