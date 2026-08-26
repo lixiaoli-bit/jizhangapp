@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recha
 import './App.css'
 
 // ====== 预设分类 ======
-const CATEGORIES = ['餐饮1', '交通', '购物', '工资', '娱乐', '投资', '其他']
+const CATEGORIES = ['餐饮', '交通', '购物', '工资', '娱乐', '投资', '其他']
 
 // ====== 柔雾莫兰迪色系 ======
 const COLORS = [
@@ -23,6 +23,8 @@ function App() {
     const saved = localStorage.getItem('budget')
     return saved ? Number(saved) : 5000
   })
+  // 饼图切换：'income' 或 'expense'
+  const [pieMode, setPieMode] = useState('income')
 
   // ---------- 自动持久化 ----------
   useEffect(() => {
@@ -55,7 +57,7 @@ function App() {
     return transactions.filter(t => dayjs(t.date).format('YYYY-MM') === month)
   }, [transactions, month])
 
-  // ---------- 统计计算（双饼图数据） ----------
+  // ---------- 统计计算 ----------
   const { totalIncome, totalExpense, balance, incomePieData, expensePieData } = useMemo(() => {
     let income = 0, expense = 0
     const incomeMap = {}
@@ -82,6 +84,11 @@ function App() {
       expensePieData 
     }
   }, [monthData])
+
+  // ---------- 当前饼图数据 ----------
+  const currentPieData = pieMode === 'income' ? incomePieData : expensePieData
+  const pieTitle = pieMode === 'income' ? '📈 收入分类占比' : '📉 支出分类占比'
+  const pieTitleClass = pieMode === 'income' ? 'income-title' : 'expense-title'
 
   // ---------- 预算警告 ----------
   const isOverBudget = totalExpense > budget
@@ -155,68 +162,58 @@ function App() {
       )}
 
       <div className="dashboard">
+        {/* 饼图区域 */}
         <div className="chart-area">
-          {/* 收入饼图 */}
           <div className="pie-wrapper">
-            <p className="pie-title income-title">📈 收入分类占比</p>
-            {incomePieData.length > 0 ? (
-              <>
-                <ResponsiveContainer width="100%" height={200}>
-                  <PieChart>
-                    <Pie 
-                      data={incomePieData} 
-                      cx="50%" 
-                      cy="50%" 
-                      innerRadius={35} 
-                      outerRadius={70} 
-                      dataKey="value"
-                    >
-                      {incomePieData.map((_, index) => (
-                        <Cell key={`income-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip formatter={(value) => `¥${value.toFixed(2)}`} />
-                    <Legend 
-                      content={renderLegend(incomePieData)}
-                      wrapperStyle={{ width: '100%' }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-              </>
-            ) : <p className="empty-chart">暂无收入数据</p>}
-          </div>
+            {/* 切换开关 */}
+            <div className="pie-toggle">
+              <button 
+                className={pieMode === 'income' ? 'active' : ''}
+                onClick={() => setPieMode('income')}
+              >
+                💰 收入
+              </button>
+              <button 
+                className={pieMode === 'expense' ? 'active' : ''}
+                onClick={() => setPieMode('expense')}
+              >
+                💸 支出
+              </button>
+            </div>
 
-          {/* 支出饼图 */}
-          <div className="pie-wrapper">
-            <p className="pie-title expense-title">📉 支出分类占比</p>
-            {expensePieData.length > 0 ? (
-              <>
-                <ResponsiveContainer width="100%" height={200}>
-                  <PieChart>
-                    <Pie 
-                      data={expensePieData} 
-                      cx="50%" 
-                      cy="50%" 
-                      innerRadius={35} 
-                      outerRadius={70} 
-                      dataKey="value"
-                    >
-                      {expensePieData.map((_, index) => (
-                        <Cell key={`expense-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip formatter={(value) => `¥${value.toFixed(2)}`} />
-                    <Legend 
-                      content={renderLegend(expensePieData)}
-                      wrapperStyle={{ width: '100%' }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-              </>
-            ) : <p className="empty-chart">暂无支出数据</p>}
+            <p className={`pie-title ${pieTitleClass}`}>{pieTitle}</p>
+            
+            {currentPieData.length > 0 ? (
+              <ResponsiveContainer width="100%" height={260}>
+                <PieChart>
+                  <Pie 
+                    data={currentPieData} 
+                    cx="50%" 
+                    cy="50%" 
+                    innerRadius={45} 
+                    outerRadius={90} 
+                    dataKey="value"
+                  >
+                    {currentPieData.map((_, index) => (
+                      <Cell key={`pie-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip formatter={(value) => `¥${value.toFixed(2)}`} />
+                  <Legend 
+                    content={renderLegend(currentPieData)}
+                    wrapperStyle={{ width: '100%' }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <p className="empty-chart">
+                {pieMode === 'income' ? '暂无收入数据' : '暂无支出数据'}
+              </p>
+            )}
           </div>
         </div>
 
+        {/* 表单区域 */}
         <div className="form-area">
           <TransactionForm 
             onAdd={addTransaction} 
