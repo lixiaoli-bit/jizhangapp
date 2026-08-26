@@ -1,7 +1,3 @@
-* {
-    -webkit-text-size-adjust: 100% !important;
-    text-size-adjust: 100% !important;
-}
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { 
   font-family: system-ui, -apple-system, sans-serif; 
@@ -391,96 +387,96 @@ h1::before { content: '✨ '; }
 .empty { text-align: center; color: #b5a8c4; padding: 20px 0; font-size: 0.9rem; }
 
 /* ============================================================
-   手机适配（宽度 < 768px）- 整体缩小
+   手机适配（宽度 < 768px）- 整体缩放 0.92
    ============================================================ */
 @media (max-width: 768px) {
-  body { padding: 2px; }
+  body { padding: 4px; }
   .app { 
-    padding: 10px; 
-    border-radius: 14px;
-    transform: scale(0.82);
+    padding: 12px; 
+    border-radius: 16px;
+    transform: scale(0.92);
     transform-origin: top center;
   }
-  h1 { font-size: 1.1rem; }
+  h1 { font-size: 1.2rem; }
   
-  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
-  .stat-card { padding: 6px 4px; border-radius: 8px; }
-  .stat-card .value { font-size: 0.85rem; }
-  .stat-card .label { font-size: 0.55rem; }
+  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .stat-card { padding: 8px 6px; border-radius: 10px; }
+  .stat-card .value { font-size: 0.95rem; }
+  .stat-card .label { font-size: 0.6rem; }
   
-  .toolbar { padding: 8px 10px; gap: 4px; }
-  .toolbar input[type="month"] { font-size: 0.7rem; padding: 4px 6px; min-width: 80px; }
-  .toolbar label { font-size: 0.7rem; }
-  .toolbar input[type="number"] { width: 50px; padding: 4px 6px; font-size: 0.7rem; }
-  .toolbar button { font-size: 0.65rem; padding: 4px 10px; }
+  .toolbar { padding: 10px 12px; gap: 6px; }
+  .toolbar input[type="month"] { font-size: 0.75rem; padding: 4px 8px; min-width: 100px; }
+  .toolbar label { font-size: 0.75rem; }
+  .toolbar input[type="number"] { width: 60px; padding: 4px 6px; font-size: 0.75rem; }
+  .toolbar button { font-size: 0.7rem; padding: 4px 12px; }
   
-  .chart-area { padding: 6px; gap: 4px; }
-  .pie-wrapper { min-width: 120px; max-width: 100%; }
-  .pie-title { font-size: 0.7rem; }
-  .empty-chart { padding: 16px 0; font-size: 0.7rem; }
+  .chart-area { padding: 8px; gap: 6px; }
+  .pie-wrapper { min-width: 140px; max-width: 100%; }
+  .pie-title { font-size: 0.75rem; }
+  .empty-chart { padding: 20px 0; font-size: 0.75rem; }
   
-  .pie-toggle button { font-size: 0.7rem; padding: 4px 10px; }
+  .pie-toggle button { font-size: 0.75rem; padding: 5px 12px; }
   
   .pie-container .recharts-wrapper {
-    transform: scale(0.80);
+    transform: scale(0.85);
     transform-origin: center center;
   }
   
-  .legend-item { font-size: 11px; gap: 3px; }
+  .legend-item { font-size: 12px; gap: 4px; }
+  .legend-color { width: 10px; height: 10px; }
+  .legend-percent { font-size: 11px; }
+  .legend-list { gap: 6px 14px; }
+  
+  .transaction-form { padding: 12px; }
+  .transaction-form h3 { font-size: 0.85rem; margin-bottom: 8px; }
+  .form-row input, .form-row select { font-size: 0.75rem; padding: 6px 8px; min-width: 60px; }
+  .form-row button { font-size: 0.75rem; padding: 6px 12px; }
+  
+  .day-group { padding: 8px 10px; }
+  .day-group h4 { font-size: 0.7rem; }
+  .transaction-item { font-size: 0.7rem; padding: 4px 8px; }
+  .transaction-item button { font-size: 12px; }
+}
+
+/* ============================================================
+   小屏手机（宽度 < 420px）- 整体缩放 0.88
+   ============================================================ */
+@media (max-width: 420px) {
+  .app { 
+    transform: scale(0.88);
+    transform-origin: top center;
+    padding: 10px;
+  }
+  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+  .stat-card .value { font-size: 0.8rem; }
+  .stat-card .label { font-size: 0.55rem; }
+  
+  .pie-wrapper { min-width: 120px; max-width: 100%; }
+  .pie-title { font-size: 0.65rem; }
+  
+  .pie-toggle button { font-size: 0.65rem; padding: 4px 8px; }
+  
+  .pie-container .recharts-wrapper {
+    transform: scale(0.75);
+    transform-origin: center center;
+  }
+  
+  .legend-item { font-size: 11px; gap: 4px; }
   .legend-color { width: 9px; height: 9px; }
   .legend-percent { font-size: 10px; }
   .legend-list { gap: 4px 10px; }
   
-  .transaction-form { padding: 10px; }
-  .transaction-form h3 { font-size: 0.8rem; margin-bottom: 6px; }
-  .form-row input, .form-row select { font-size: 0.7rem; padding: 5px 6px; min-width: 50px; }
-  .form-row button { font-size: 0.7rem; padding: 5px 10px; }
+  .toolbar input[type="month"] { font-size: 0.65rem; min-width: 80px; }
+  .toolbar label { font-size: 0.65rem; }
+  .toolbar input[type="number"] { width: 50px; font-size: 0.65rem; }
+  .toolbar button { font-size: 0.6rem; padding: 3px 8px; }
   
-  .day-group { padding: 6px 8px; }
-  .day-group h4 { font-size: 0.65rem; }
-  .transaction-item { font-size: 0.65rem; padding: 4px 6px; }
-  .transaction-item button { font-size: 11px; }
-}
-
-/* ============================================================
-   小屏手机（宽度 < 420px）- 整体再缩小一点
-   ============================================================ */
-@media (max-width: 420px) {
-  .app { 
-    transform: scale(0.75);
-    transform-origin: top center;
-    padding: 8px;
-  }
-  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
-  .stat-card .value { font-size: 0.75rem; }
-  .stat-card .label { font-size: 0.5rem; }
+  .form-row input, .form-row select { font-size: 0.65rem; padding: 4px 6px; min-width: 50px; }
+  .form-row button { font-size: 0.65rem; padding: 4px 10px; }
   
-  .pie-wrapper { min-width: 100px; max-width: 100%; }
-  .pie-title { font-size: 0.6rem; }
-  
-  .pie-toggle button { font-size: 0.6rem; padding: 3px 6px; }
-  
-  .pie-container .recharts-wrapper {
-    transform: scale(0.70);
-    transform-origin: center center;
-  }
-  
-  .legend-item { font-size: 10px; gap: 2px; }
-  .legend-color { width: 8px; height: 8px; }
-  .legend-percent { font-size: 9px; }
-  .legend-list { gap: 3px 8px; }
-  
-  .toolbar input[type="month"] { font-size: 0.6rem; min-width: 70px; }
-  .toolbar label { font-size: 0.6rem; }
-  .toolbar input[type="number"] { width: 45px; font-size: 0.6rem; }
-  .toolbar button { font-size: 0.55rem; padding: 3px 6px; }
-  
-  .form-row input, .form-row select { font-size: 0.6rem; padding: 4px 5px; min-width: 40px; }
-  .form-row button { font-size: 0.6rem; padding: 4px 8px; }
-  
-  .transaction-item { font-size: 0.55rem; padding: 3px 4px; flex-wrap: wrap; gap: 2px; }
-  .transaction-item button { font-size: 9px; }
-  .day-group h4 { font-size: 0.55rem; }
+  .transaction-item { font-size: 0.6rem; padding: 3px 6px; flex-wrap: wrap; gap: 2px; }
+  .transaction-item button { font-size: 10px; }
+  .day-group h4 { font-size: 0.6rem; }
 }
 
 /* ============================================================
