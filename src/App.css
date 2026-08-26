@@ -3,7 +3,7 @@ body {
   font-family: system-ui, -apple-system, sans-serif; 
   min-height: 100vh;
   background: linear-gradient(145deg, #eef3f7 0%, #f5edf5 100%);
-  padding: 12px;
+  padding: 8px;
 }
 
 .app { 
@@ -12,42 +12,42 @@ body {
   background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding: 20px; 
-  border-radius: 20px; 
+  padding: 14px; 
+  border-radius: 16px; 
   box-shadow: 0 8px 32px rgba(150, 150, 180, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 h1 { 
   color: #5b4a7a;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   letter-spacing: 0.5px;
 }
 h1::before { content: '✨ '; }
 
 .toolbar { 
   display: flex; 
-  gap: 10px; 
+  gap: 6px; 
   flex-wrap: wrap; 
   align-items: center; 
-  margin: 10px 0 14px 0;
-  padding: 12px 16px;
+  margin: 6px 0 8px 0;
+  padding: 8px 12px;
   background: rgba(255, 255, 255, 0.5);
-  border-radius: 14px;
+  border-radius: 12px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 .toolbar input[type="month"] { 
-  padding: 6px 12px; 
+  padding: 4px 10px; 
   border: 1px solid #d5cde6; 
-  border-radius: 10px; 
+  border-radius: 8px; 
   background: white;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #4a3a5e;
   flex: 1;
-  min-width: 120px;
+  min-width: 100px;
 }
 .toolbar input[type="month"]:focus {
   outline: none;
@@ -57,18 +57,19 @@ h1::before { content: '✨ '; }
 .toolbar label { 
   display: flex; 
   align-items: center; 
-  gap: 6px; 
+  gap: 4px; 
   font-weight: 500;
   color: #5b4a7a;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
 }
 .toolbar input[type="number"] {
-  width: 80px;
-  padding: 6px 10px;
+  width: 60px;
+  padding: 4px 8px;
   border: 1px solid #d5cde6;
-  border-radius: 10px;
+  border-radius: 8px;
   background: white;
   color: #4a3a5e;
+  font-size: 0.8rem;
 }
 .toolbar input[type="number"]:focus {
   outline: none;
@@ -76,14 +77,14 @@ h1::before { content: '✨ '; }
   box-shadow: 0 0 0 3px rgba(184, 165, 214, 0.15);
 }
 .toolbar button { 
-  padding: 6px 16px; 
+  padding: 4px 12px; 
   background: linear-gradient(135deg, #b8a5d6, #9b8abf);
   color: white; 
   border: none; 
-  border-radius: 10px; 
+  border-radius: 8px; 
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   transition: all 0.2s;
   box-shadow: 0 2px 8px rgba(155, 138, 191, 0.2);
 }
@@ -98,12 +99,12 @@ h1::before { content: '✨ '; }
 .stats { 
   display: grid; 
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px; 
-  margin: 10px 0 14px 0;
+  gap: 6px; 
+  margin: 6px 0 8px 0;
 }
 .stat-card { 
-  padding: 12px 14px; 
-  border-radius: 14px; 
+  padding: 8px 10px; 
+  border-radius: 10px; 
   text-align: center;
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
@@ -117,14 +118,14 @@ h1::before { content: '✨ '; }
 }
 .stat-card .label { 
   display: block; 
-  font-size: 0.7rem; 
+  font-size: 0.65rem; 
   color: #8a7a9e; 
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   font-weight: 500;
   letter-spacing: 0.3px;
 }
 .stat-card .value { 
-  font-size: 1.2rem; 
+  font-size: 1.1rem; 
   font-weight: 700; 
   color: #3d2e52;
 }
@@ -147,11 +148,11 @@ h1::before { content: '✨ '; }
 .alert { 
   background: linear-gradient(135deg, #fce4e4, #f8d7d7);
   color: #b71c1c; 
-  padding: 10px 16px; 
-  border-radius: 12px; 
-  margin: 8px 0 14px 0; 
+  padding: 6px 12px; 
+  border-radius: 10px; 
+  margin: 4px 0 8px 0; 
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   border: 1px solid rgba(212, 165, 165, 0.3);
   box-shadow: 0 2px 12px rgba(212, 165, 165, 0.08);
   animation: pulseAlert 2s infinite;
@@ -164,39 +165,39 @@ h1::before { content: '✨ '; }
 .dashboard { 
   display: flex; 
   flex-direction: column;
-  gap: 16px; 
-  margin: 14px 0; 
+  gap: 10px; 
+  margin: 8px 0; 
 }
 .chart-area { 
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
+  gap: 6px;
   background: rgba(255, 255, 255, 0.3);
-  padding: 12px;
-  border-radius: 16px;
+  padding: 8px;
+  border-radius: 12px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .pie-wrapper {
   text-align: center;
   flex: 1;
-  min-width: 200px;
-  max-width: 400px;
+  min-width: 160px;
+  max-width: 380px;
   width: 100%;
 }
 .pie-title {
   font-weight: 600;
-  font-size: 0.85rem;
-  margin-bottom: 2px;
+  font-size: 0.8rem;
+  margin-bottom: 1px;
 }
 .income-title { color: #5B8A6F; }
 .expense-title { color: #C47A7A; }
 .empty-chart {
   color: #b5a8c4;
-  padding: 30px 0;
-  font-size: 0.85rem;
+  padding: 20px 0;
+  font-size: 0.8rem;
 }
 
 .pie-container {
@@ -204,7 +205,7 @@ h1::before { content: '✨ '; }
   justify-content: center;
   width: 100%;
   overflow-x: auto;
-  padding: 4px 0;
+  padding: 2px 0;
 }
 .pie-container .recharts-wrapper {
   max-width: 100%;
@@ -215,18 +216,18 @@ h1::before { content: '✨ '; }
   display: flex;
   justify-content: center;
   gap: 0;
-  margin-bottom: 6px;
-  border-radius: 12px;
+  margin-bottom: 4px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(184, 165, 214, 0.3);
   background: rgba(255, 255, 255, 0.3);
 }
 .pie-toggle button {
-  padding: 6px 20px;
+  padding: 4px 16px;
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #8a7a9e;
   transition: all 0.25s;
@@ -251,22 +252,22 @@ h1::before { content: '✨ '; }
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 6px 14px;
-  padding: 8px 4px 0 4px;
+  gap: 4px 12px;
+  padding: 4px 4px 0 4px;
   margin: 0;
   list-style: none;
 }
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 12px;
+  gap: 3px;
+  font-size: 11px;
   color: #4a3a5e;
 }
 .legend-color {
   display: inline-block;
-  width: 11px;
-  height: 11px;
+  width: 10px;
+  height: 10px;
   border-radius: 3px;
   flex-shrink: 0;
 }
@@ -276,7 +277,7 @@ h1::before { content: '✨ '; }
 .legend-percent {
   font-weight: 600;
   color: #8a7a9e;
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .form-area { 
@@ -285,25 +286,25 @@ h1::before { content: '✨ '; }
 .transaction-form { 
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
-  padding: 16px; 
-  border-radius: 16px;
+  padding: 12px; 
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.4);
 }
 .transaction-form h3 { 
-  margin-bottom: 12px; 
+  margin-bottom: 8px; 
   color: #4a3a5e;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
-.form-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.form-row { display: flex; gap: 6px; margin-bottom: 6px; flex-wrap: wrap; }
 .form-row input, .form-row select { 
   flex: 1; 
-  min-width: 80px; 
-  padding: 8px 12px; 
+  min-width: 70px; 
+  padding: 6px 10px; 
   border: 1px solid #ddd0e8; 
-  border-radius: 10px;
+  border-radius: 8px;
   background: white;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #3d2e52;
   transition: all 0.2s;
 }
@@ -314,14 +315,14 @@ h1::before { content: '✨ '; }
 }
 .form-row input::placeholder { color: #c5b8d0; }
 .form-row button { 
-  padding: 8px 18px; 
+  padding: 6px 14px; 
   background: linear-gradient(135deg, #b8a5d6, #9b8abf);
   color: white; 
   border: none; 
-  border-radius: 10px; 
+  border-radius: 8px; 
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   transition: all 0.2s;
   box-shadow: 0 2px 8px rgba(155, 138, 191, 0.15);
 }
@@ -338,33 +339,33 @@ h1::before { content: '✨ '; }
   transform: none;
 }
 
-.list { margin-top: 16px; }
+.list { margin-top: 10px; }
 .day-group { 
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
-  padding: 10px 14px; 
-  border-radius: 12px; 
-  margin-bottom: 10px;
+  padding: 6px 10px; 
+  border-radius: 10px; 
+  margin-bottom: 6px;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .day-group h4 { 
-  margin-bottom: 8px; 
+  margin-bottom: 4px; 
   color: #6a5a7e;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   border-bottom: 1px solid rgba(0,0,0,0.04);
-  padding-bottom: 6px;
+  padding-bottom: 4px;
 }
 .transaction-item { 
   display: flex; 
   justify-content: space-between; 
   align-items: center; 
-  padding: 6px 10px; 
+  padding: 4px 8px; 
   background: rgba(255, 255, 255, 0.5);
-  border-radius: 8px; 
-  margin-bottom: 4px; 
+  border-radius: 6px; 
+  margin-bottom: 3px; 
   border-left: 3px solid; 
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   transition: all 0.15s;
 }
 .transaction-item:hover { 
@@ -376,120 +377,116 @@ h1::before { content: '✨ '; }
   background: none; 
   border: none; 
   cursor: pointer; 
-  margin-left: 4px; 
-  font-size: 14px;
-  padding: 2px 4px;
-  border-radius: 6px;
+  margin-left: 3px; 
+  font-size: 12px;
+  padding: 1px 3px;
+  border-radius: 4px;
   transition: background 0.15s;
 }
 .transaction-item button:hover { background: rgba(0,0,0,0.05); }
 
-.empty { text-align: center; color: #b5a8c4; padding: 20px 0; font-size: 0.9rem; }
+.empty { text-align: center; color: #b5a8c4; padding: 12px 0; font-size: 0.85rem; }
 
 /* ============================================================
-   手机适配（宽度 < 768px）- 饼图再缩小
+   手机适配（宽度 < 768px）
    ============================================================ */
 @media (max-width: 768px) {
   body { padding: 4px; }
   .app { 
-    padding: 12px; 
-    border-radius: 16px;
+    padding: 10px; 
+    border-radius: 12px;
     transform: scale(0.92);
     transform-origin: top center;
     width: 108.7%;
   }
-  h1 { font-size: 1.2rem; }
+  h1 { font-size: 1.1rem; }
   
-  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
-  .stat-card { padding: 8px 6px; border-radius: 10px; }
-  .stat-card .value { font-size: 0.95rem; }
-  .stat-card .label { font-size: 0.6rem; }
+  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+  .stat-card { padding: 6px 4px; border-radius: 8px; }
+  .stat-card .value { font-size: 0.85rem; }
+  .stat-card .label { font-size: 0.55rem; }
   
-  .toolbar { padding: 10px 12px; gap: 6px; }
-  .toolbar input[type="month"] { font-size: 0.75rem; padding: 4px 8px; min-width: 100px; }
-  .toolbar label { font-size: 0.75rem; }
-  .toolbar input[type="number"] { width: 60px; padding: 4px 6px; font-size: 0.75rem; }
-  .toolbar button { font-size: 0.7rem; padding: 4px 12px; }
+  .toolbar { padding: 6px 8px; gap: 4px; }
+  .toolbar input[type="month"] { font-size: 0.7rem; padding: 3px 6px; min-width: 80px; }
+  .toolbar label { font-size: 0.7rem; }
+  .toolbar input[type="number"] { width: 50px; padding: 3px 5px; font-size: 0.7rem; }
+  .toolbar button { font-size: 0.65rem; padding: 3px 8px; }
   
-  .chart-area { padding: 8px; gap: 6px; }
-  .pie-wrapper { min-width: 140px; max-width: 100%; }
-  .pie-title { font-size: 0.75rem; }
-  .empty-chart { padding: 20px 0; font-size: 0.75rem; }
+  .chart-area { padding: 6px; gap: 4px; }
+  .pie-wrapper { min-width: 120px; max-width: 100%; }
+  .pie-title { font-size: 0.7rem; }
+  .empty-chart { padding: 12px 0; font-size: 0.7rem; }
   
-  .pie-toggle button { font-size: 0.75rem; padding: 5px 12px; }
+  .pie-toggle button { font-size: 0.7rem; padding: 3px 10px; }
   
-  /* 饼图缩小（只缩小饼图，文字不变） */
   .pie-container .recharts-wrapper {
     transform: scale(0.55);
     transform-origin: center center;
   }
   
-  /* 文字大小保持不变 */
-  .legend-item { font-size: 12px; gap: 4px; }
-  .legend-color { width: 10px; height: 10px; }
-  .legend-percent { font-size: 11px; }
-  .legend-list { gap: 6px 14px; }
+  .legend-item { font-size: 11px; gap: 3px; }
+  .legend-color { width: 9px; height: 9px; }
+  .legend-percent { font-size: 10px; }
+  .legend-list { gap: 4px 10px; }
   
-  .transaction-form { padding: 12px; }
-  .transaction-form h3 { font-size: 0.85rem; margin-bottom: 8px; }
-  .form-row input, .form-row select { font-size: 0.75rem; padding: 6px 8px; min-width: 60px; }
-  .form-row button { font-size: 0.75rem; padding: 6px 12px; }
+  .transaction-form { padding: 10px; }
+  .transaction-form h3 { font-size: 0.8rem; margin-bottom: 6px; }
+  .form-row input, .form-row select { font-size: 0.7rem; padding: 4px 6px; min-width: 50px; }
+  .form-row button { font-size: 0.7rem; padding: 4px 10px; }
   
-  .day-group { padding: 8px 10px; }
-  .day-group h4 { font-size: 0.7rem; }
-  .transaction-item { font-size: 0.7rem; padding: 4px 8px; }
-  .transaction-item button { font-size: 12px; }
+  .day-group { padding: 4px 8px; }
+  .day-group h4 { font-size: 0.65rem; }
+  .transaction-item { font-size: 0.65rem; padding: 3px 6px; }
+  .transaction-item button { font-size: 10px; }
 }
 
 /* ============================================================
-   小屏手机（宽度 < 420px）- 饼图再缩小
+   小屏手机（宽度 < 420px）
    ============================================================ */
 @media (max-width: 420px) {
   .app { 
     transform: scale(0.88);
     transform-origin: top center;
-    padding: 10px;
+    padding: 8px;
     width: 113.6%;
   }
-  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
-  .stat-card .value { font-size: 0.8rem; }
-  .stat-card .label { font-size: 0.55rem; }
+  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 3px; }
+  .stat-card .value { font-size: 0.75rem; }
+  .stat-card .label { font-size: 0.5rem; }
   
-  .pie-wrapper { min-width: 120px; max-width: 100%; }
-  .pie-title { font-size: 0.65rem; }
+  .pie-wrapper { min-width: 100px; max-width: 100%; }
+  .pie-title { font-size: 0.6rem; }
   
-  .pie-toggle button { font-size: 0.65rem; padding: 4px 8px; }
+  .pie-toggle button { font-size: 0.6rem; padding: 3px 8px; }
   
-  /* 饼图再缩小（只缩小饼图，文字不变） */
   .pie-container .recharts-wrapper {
     transform: scale(0.45);
     transform-origin: center center;
   }
   
-  /* 文字大小保持不变 */
-  .legend-item { font-size: 11px; gap: 4px; }
-  .legend-color { width: 9px; height: 9px; }
-  .legend-percent { font-size: 10px; }
-  .legend-list { gap: 4px 10px; }
+  .legend-item { font-size: 10px; gap: 2px; }
+  .legend-color { width: 8px; height: 8px; }
+  .legend-percent { font-size: 9px; }
+  .legend-list { gap: 3px 8px; }
   
-  .toolbar input[type="month"] { font-size: 0.65rem; min-width: 80px; }
-  .toolbar label { font-size: 0.65rem; }
-  .toolbar input[type="number"] { width: 50px; font-size: 0.65rem; }
-  .toolbar button { font-size: 0.6rem; padding: 3px 8px; }
+  .toolbar input[type="month"] { font-size: 0.6rem; min-width: 70px; }
+  .toolbar label { font-size: 0.6rem; }
+  .toolbar input[type="number"] { width: 40px; font-size: 0.6rem; }
+  .toolbar button { font-size: 0.55rem; padding: 2px 6px; }
   
-  .form-row input, .form-row select { font-size: 0.65rem; padding: 4px 6px; min-width: 50px; }
-  .form-row button { font-size: 0.65rem; padding: 4px 10px; }
+  .form-row input, .form-row select { font-size: 0.6rem; padding: 3px 5px; min-width: 40px; }
+  .form-row button { font-size: 0.6rem; padding: 3px 8px; }
   
-  .transaction-item { font-size: 0.6rem; padding: 3px 6px; flex-wrap: wrap; gap: 2px; }
-  .transaction-item button { font-size: 10px; }
-  .day-group h4 { font-size: 0.6rem; }
+  .transaction-item { font-size: 0.55rem; padding: 2px 4px; flex-wrap: wrap; gap: 2px; }
+  .transaction-item button { font-size: 9px; }
+  .day-group h4 { font-size: 0.55rem; }
 }
 
 /* ============================================================
-   平板（宽度 768px - 1024px）- 饼图缩小
+   平板（宽度 768px - 1024px）
    ============================================================ */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .pie-wrapper { max-width: 360px; }
+  .pie-wrapper { max-width: 340px; }
   .pie-container .recharts-wrapper {
     transform: scale(0.65);
     transform-origin: center center;
