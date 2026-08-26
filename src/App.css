@@ -378,3 +378,73 @@ h1::before { content: '✨ '; }
   .pie-wrapper { max-width: 260px; }
   .pie-wrapper .recharts-responsive-container { height: 220px !important; }
 }
+/* ====== 自定义图例样式（饼图下方） ====== */
+.legend-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+  padding: 8px 4px 0 4px;
+  margin: 0;
+  list-style: none;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #4a3a5e;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.legend-name {
+  font-weight: 500;
+}
+
+.legend-percent {
+  font-weight: 600;
+  color: #8a7a9e;
+  font-size: 10px;
+}
+
+/* 手机端图例更小 */
+@media (max-width: 768px) {
+  .legend-item {
+    font-size: 10px;
+    gap: 3px;
+  }
+  .legend-color {
+    width: 8px;
+    height: 8px;
+  }
+  .legend-percent {
+    font-size: 9px;
+  }
+  .legend-list {
+    gap: 4px 10px;
+  }
+}
+
+@media (max-width: 420px) {
+  .legend-item {
+    font-size: 9px;
+  }
+  .legend-color {
+    width: 7px;
+    height: 7px;
+  }
+  .legend-percent {
+    font-size: 8px;
+  }
+  .legend-list {
+    gap: 3px 8px;
+  }
+}

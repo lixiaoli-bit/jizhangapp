@@ -100,6 +100,26 @@ function App() {
     link.click()
   }
 
+  // ====== 自定义图例渲染（百分比） ======
+  const renderLegend = (data) => (props) => {
+    const { payload } = props
+    const total = data.reduce((sum, d) => sum + d.value, 0)
+    return (
+      <ul className="legend-list">
+        {payload.map((entry, index) => {
+          const percent = ((entry.payload.value / total) * 100).toFixed(1)
+          return (
+            <li key={`item-${index}`} className="legend-item">
+              <span className="legend-color" style={{ backgroundColor: entry.color }}></span>
+              <span className="legend-name">{entry.value}</span>
+              <span className="legend-percent">{percent}%</span>
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
+
   // ====== 渲染UI ======
   return (
     <div className="app">
@@ -140,33 +160,29 @@ function App() {
           <div className="pie-wrapper">
             <p className="pie-title income-title">📈 收入分类占比</p>
             {incomePieData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={240}>
-                <PieChart>
-                  <Pie 
-                    data={incomePieData} 
-                    cx="50%" 
-                    cy="50%" 
-                    innerRadius={40} 
-                    outerRadius={80} 
-                    dataKey="value"
-                  >
-                    {incomePieData.map((_, index) => (
-                      <Cell key={`income-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip formatter={(value) => `¥${value.toFixed(2)}`} />
-                  <Legend 
-                    wrapperStyle={{ fontSize: '12px' }}
-                    iconSize={12}
-                    formatter={(value, entry) => {
-                      const total = incomePieData.reduce((sum, d) => sum + d.value, 0)
-                      const item = incomePieData.find(d => d.name === value)
-                      const percent = item ? ((item.value / total) * 100).toFixed(1) : 0
-                      return `${value}  ${percent}%`
-                    }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+              <>
+                <ResponsiveContainer width="100%" height={200}>
+                  <PieChart>
+                    <Pie 
+                      data={incomePieData} 
+                      cx="50%" 
+                      cy="50%" 
+                      innerRadius={35} 
+                      outerRadius={70} 
+                      dataKey="value"
+                    >
+                      {incomePieData.map((_, index) => (
+                        <Cell key={`income-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => `¥${value.toFixed(2)}`} />
+                    <Legend 
+                      content={renderLegend(incomePieData)}
+                      wrapperStyle={{ width: '100%' }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </>
             ) : <p className="empty-chart">暂无收入数据</p>}
           </div>
 
@@ -174,33 +190,29 @@ function App() {
           <div className="pie-wrapper">
             <p className="pie-title expense-title">📉 支出分类占比</p>
             {expensePieData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={240}>
-                <PieChart>
-                  <Pie 
-                    data={expensePieData} 
-                    cx="50%" 
-                    cy="50%" 
-                    innerRadius={40} 
-                    outerRadius={80} 
-                    dataKey="value"
-                  >
-                    {expensePieData.map((_, index) => (
-                      <Cell key={`expense-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip formatter={(value) => `¥${value.toFixed(2)}`} />
-                  <Legend 
-                    wrapperStyle={{ fontSize: '12px' }}
-                    iconSize={12}
-                    formatter={(value, entry) => {
-                      const total = expensePieData.reduce((sum, d) => sum + d.value, 0)
-                      const item = expensePieData.find(d => d.name === value)
-                      const percent = item ? ((item.value / total) * 100).toFixed(1) : 0
-                      return `${value}  ${percent}%`
-                    }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
+              <>
+                <ResponsiveContainer width="100%" height={200}>
+                  <PieChart>
+                    <Pie 
+                      data={expensePieData} 
+                      cx="50%" 
+                      cy="50%" 
+                      innerRadius={35} 
+                      outerRadius={70} 
+                      dataKey="value"
+                    >
+                      {expensePieData.map((_, index) => (
+                        <Cell key={`expense-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip formatter={(value) => `¥${value.toFixed(2)}`} />
+                    <Legend 
+                      content={renderLegend(expensePieData)}
+                      wrapperStyle={{ width: '100%' }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </>
             ) : <p className="empty-chart">暂无支出数据</p>}
           </div>
         </div>
