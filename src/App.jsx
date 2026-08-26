@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import dayjs from 'dayjs'
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
 import './App.css'
 
 // ====== 预设分类 ======
@@ -12,7 +12,6 @@ const COLORS = [
 ]
 
 function App() {
-  // ---------- 核心状态 ----------
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem('transactions')
     return saved ? JSON.parse(saved) : []
@@ -23,10 +22,8 @@ function App() {
     const saved = localStorage.getItem('budget')
     return saved ? Number(saved) : 5000
   })
-  // 饼图切换：'income' 或 'expense'
   const [pieMode, setPieMode] = useState('income')
 
-  // ---------- 自动持久化 ----------
   useEffect(() => {
     localStorage.setItem('transactions', JSON.stringify(transactions))
   }, [transactions])
@@ -35,7 +32,6 @@ function App() {
     localStorage.setItem('budget', String(budget))
   }, [budget])
 
-  // ---------- 增删改函数 ----------
   const addTransaction = (newRecord) => {
     setTransactions(prev => [...prev, { ...newRecord, id: Date.now() }])
   }
@@ -52,12 +48,10 @@ function App() {
     ))
   }
 
-  // ---------- 月度数据过滤 ----------
   const monthData = useMemo(() => {
     return transactions.filter(t => dayjs(t.date).format('YYYY-MM') === month)
   }, [transactions, month])
 
-  // ---------- 统计计算 ----------
   const { totalIncome, totalExpense, balance, incomePieData, expensePieData } = useMemo(() => {
     let income = 0, expense = 0
     const incomeMap = {}
@@ -85,15 +79,12 @@ function App() {
     }
   }, [monthData])
 
-  // ---------- 当前饼图数据 ----------
   const currentPieData = pieMode === 'income' ? incomePieData : expensePieData
   const pieTitle = pieMode === 'income' ? '📈 收入分类占比' : '📉 支出分类占比'
   const pieTitleClass = pieMode === 'income' ? 'income-title' : 'expense-title'
 
-  // ---------- 预算警告 ----------
   const isOverBudget = totalExpense > budget
 
-  // ---------- 导出CSV ----------
   const exportCSV = () => {
     if (monthData.length === 0) return alert('本月无数据可导出')
     const headers = '日期,类型,分类,金额,描述\n'
@@ -107,7 +98,6 @@ function App() {
     link.click()
   }
 
-  // ====== 自定义图例渲染（百分比） ======
   const renderLegend = (data) => (props) => {
     const { payload } = props
     const total = data.reduce((sum, d) => sum + d.value, 0)
@@ -127,7 +117,6 @@ function App() {
     )
   }
 
-  // ====== 渲染UI ======
   return (
     <div className="app">
       <h1>💰 豪华记账本</h1>
@@ -162,10 +151,8 @@ function App() {
       )}
 
       <div className="dashboard">
-        {/* 饼图区域 */}
         <div className="chart-area">
           <div className="pie-wrapper">
-            {/* 切换开关 */}
             <div className="pie-toggle">
               <button 
                 className={pieMode === 'income' ? 'active' : ''}
@@ -184,14 +171,14 @@ function App() {
             <p className={`pie-title ${pieTitleClass}`}>{pieTitle}</p>
             
             {currentPieData.length > 0 ? (
-              <ResponsiveContainer width="100%" height={260}>
-                <PieChart>
+              <div className="pie-container">
+                <PieChart width={280} height={280}>
                   <Pie 
                     data={currentPieData} 
                     cx="50%" 
                     cy="50%" 
-                    innerRadius={45} 
-                    outerRadius={90} 
+                    innerRadius={50} 
+                    outerRadius={100} 
                     dataKey="value"
                   >
                     {currentPieData.map((_, index) => (
@@ -204,16 +191,15 @@ function App() {
                     wrapperStyle={{ width: '100%' }}
                   />
                 </PieChart>
-              </ResponsiveContainer>
+              </div>
             ) : (
               <p className="empty-chart">
-                {pieMode === 'income' ? '暂无收入数据' : '暂无支出数据'}
+                {pieMode === 'income' ? '暂无收入数据，快去添加吧 ✨' : '暂无支出数据，快去添加吧 ✨'}
               </p>
             )}
           </div>
         </div>
 
-        {/* 表单区域 */}
         <div className="form-area">
           <TransactionForm 
             onAdd={addTransaction} 

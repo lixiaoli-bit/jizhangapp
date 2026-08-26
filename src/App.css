@@ -183,12 +183,8 @@ h1::before { content: '✨ '; }
   text-align: center;
   flex: 1;
   min-width: 200px;
-  max-width: 320px;
+  max-width: 400px;
   width: 100%;
-}
-.pie-wrapper .recharts-responsive-container {
-  width: 100% !important;
-  height: 240px !important;
 }
 .pie-title {
   font-weight: 600;
@@ -199,8 +195,91 @@ h1::before { content: '✨ '; }
 .expense-title { color: #C47A7A; }
 .empty-chart {
   color: #b5a8c4;
-  padding: 40px 0;
+  padding: 30px 0;
   font-size: 0.85rem;
+}
+
+/* ====== 饼图容器（固定尺寸 + 手机缩放） ====== */
+.pie-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-x: auto;
+  padding: 4px 0;
+}
+.pie-container .recharts-wrapper {
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* ====== 饼图切换开关 ====== */
+.pie-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 6px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(184, 165, 214, 0.3);
+  background: rgba(255, 255, 255, 0.3);
+}
+.pie-toggle button {
+  padding: 6px 20px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #8a7a9e;
+  transition: all 0.25s;
+  flex: 1;
+}
+.pie-toggle button.active {
+  background: linear-gradient(135deg, #b8a5d6, #9b8abf);
+  color: white;
+  box-shadow: 0 2px 12px rgba(155, 138, 191, 0.25);
+}
+.pie-toggle button:first-child.active {
+  background: linear-gradient(135deg, #A8C4B8, #8BAF9E);
+}
+.pie-toggle button:last-child.active {
+  background: linear-gradient(135deg, #D4A5A5, #C47A7A);
+}
+.pie-toggle button:hover:not(.active) {
+  background: rgba(184, 165, 214, 0.1);
+}
+
+/* ====== 自定义图例样式 ====== */
+.legend-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+  padding: 8px 4px 0 4px;
+  margin: 0;
+  list-style: none;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #4a3a5e;
+}
+.legend-color {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.legend-name {
+  font-weight: 500;
+}
+.legend-percent {
+  font-weight: 600;
+  color: #8a7a9e;
+  font-size: 10px;
 }
 
 .form-area { 
@@ -331,9 +410,20 @@ h1::before { content: '✨ '; }
   
   .chart-area { padding: 8px; gap: 6px; }
   .pie-wrapper { min-width: 140px; max-width: 100%; }
-  .pie-wrapper .recharts-responsive-container { height: 200px !important; }
   .pie-title { font-size: 0.75rem; }
   .empty-chart { padding: 20px 0; font-size: 0.75rem; }
+  
+  .pie-toggle button { font-size: 0.75rem; padding: 5px 12px; }
+  
+  .pie-container .recharts-wrapper {
+    transform: scale(0.85);
+    transform-origin: center center;
+  }
+  
+  .legend-item { font-size: 10px; gap: 3px; }
+  .legend-color { width: 8px; height: 8px; }
+  .legend-percent { font-size: 9px; }
+  .legend-list { gap: 4px 10px; }
   
   .transaction-form { padding: 12px; }
   .transaction-form h3 { font-size: 0.85rem; margin-bottom: 8px; }
@@ -355,8 +445,19 @@ h1::before { content: '✨ '; }
   .stat-card .label { font-size: 0.55rem; }
   
   .pie-wrapper { min-width: 120px; max-width: 100%; }
-  .pie-wrapper .recharts-responsive-container { height: 160px !important; }
   .pie-title { font-size: 0.65rem; }
+  
+  .pie-toggle button { font-size: 0.65rem; padding: 4px 8px; }
+  
+  .pie-container .recharts-wrapper {
+    transform: scale(0.7);
+    transform-origin: center center;
+  }
+  
+  .legend-item { font-size: 9px; }
+  .legend-color { width: 7px; height: 7px; }
+  .legend-percent { font-size: 8px; }
+  .legend-list { gap: 3px 8px; }
   
   .toolbar input[type="month"] { font-size: 0.65rem; min-width: 80px; }
   .toolbar label { font-size: 0.65rem; }
@@ -375,132 +476,9 @@ h1::before { content: '✨ '; }
    平板（宽度 768px - 1024px）
    ============================================================ */
 @media (min-width: 768px) and (max-width: 1024px) {
-  .pie-wrapper { max-width: 260px; }
-  .pie-wrapper .recharts-responsive-container { height: 220px !important; }
-}
-/* ====== 自定义图例样式（饼图下方） ====== */
-.legend-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px 14px;
-  padding: 8px 4px 0 4px;
-  margin: 0;
-  list-style: none;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 11px;
-  color: #4a3a5e;
-}
-
-.legend-color {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 3px;
-  flex-shrink: 0;
-}
-
-.legend-name {
-  font-weight: 500;
-}
-
-.legend-percent {
-  font-weight: 600;
-  color: #8a7a9e;
-  font-size: 10px;
-}
-
-/* 手机端图例更小 */
-@media (max-width: 768px) {
-  .legend-item {
-    font-size: 10px;
-    gap: 3px;
-  }
-  .legend-color {
-    width: 8px;
-    height: 8px;
-  }
-  .legend-percent {
-    font-size: 9px;
-  }
-  .legend-list {
-    gap: 4px 10px;
-  }
-}
-
-@media (max-width: 420px) {
-  .legend-item {
-    font-size: 9px;
-  }
-  .legend-color {
-    width: 7px;
-    height: 7px;
-  }
-  .legend-percent {
-    font-size: 8px;
-  }
-  .legend-list {
-    gap: 3px 8px;
-  }
-}
-/* ====== 饼图切换开关 ====== */
-.pie-toggle {
-  display: flex;
-  justify-content: center;
-  gap: 0;
-  margin-bottom: 6px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(184, 165, 214, 0.3);
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.pie-toggle button {
-  padding: 6px 20px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #8a7a9e;
-  transition: all 0.25s;
-  flex: 1;
-}
-
-.pie-toggle button.active {
-  background: linear-gradient(135deg, #b8a5d6, #9b8abf);
-  color: white;
-  box-shadow: 0 2px 12px rgba(155, 138, 191, 0.25);
-}
-
-.pie-toggle button:first-child.active {
-  background: linear-gradient(135deg, #A8C4B8, #8BAF9E);
-}
-
-.pie-toggle button:last-child.active {
-  background: linear-gradient(135deg, #D4A5A5, #C47A7A);
-}
-
-.pie-toggle button:hover:not(.active) {
-  background: rgba(184, 165, 214, 0.1);
-}
-
-/* 手机端适配 */
-@media (max-width: 768px) {
-  .pie-toggle button {
-    font-size: 0.75rem;
-    padding: 5px 12px;
-  }
-}
-
-@media (max-width: 420px) {
-  .pie-toggle button {
-    font-size: 0.65rem;
-    padding: 4px 8px;
+  .pie-wrapper { max-width: 360px; }
+  .pie-container .recharts-wrapper {
+    transform: scale(0.9);
+    transform-origin: center center;
   }
 }
