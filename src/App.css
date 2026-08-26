@@ -205,7 +205,7 @@ h1::before { content: '✨ '; }
   justify-content: center;
   width: 100%;
   overflow-x: auto;
-  padding: 2px 0;
+  padding: 4px 0;
 }
 .pie-container .recharts-wrapper {
   max-width: 100%;
@@ -252,22 +252,22 @@ h1::before { content: '✨ '; }
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 4px 12px;
-  padding: 4px 4px 0 4px;
+  gap: 6px 14px;
+  padding: 8px 4px 0 4px;
   margin: 0;
   list-style: none;
 }
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 3px;
-  font-size: 11px;
+  gap: 4px;
+  font-size: 12px;
   color: #4a3a5e;
 }
 .legend-color {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border-radius: 3px;
   flex-shrink: 0;
 }
@@ -277,7 +277,7 @@ h1::before { content: '✨ '; }
 .legend-percent {
   font-weight: 600;
   color: #8a7a9e;
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .form-area { 
@@ -419,15 +419,31 @@ h1::before { content: '✨ '; }
   
   .pie-toggle button { font-size: 0.7rem; padding: 3px 10px; }
   
+  /* 饼图缩放 */
   .pie-container .recharts-wrapper {
-    transform: scale(0.55);
+    transform: scale(0.70);
     transform-origin: center center;
   }
   
-  .legend-item { font-size: 11px; gap: 3px; }
-  .legend-color { width: 9px; height: 9px; }
-  .legend-percent { font-size: 10px; }
-  .legend-list { gap: 4px 10px; }
+  /* ====== 手机版图例调大 + 增加间距 ====== */
+  .pie-container {
+    padding: 8px 0 14px 0;
+  }
+  .legend-item { 
+    font-size: 14px !important; 
+    gap: 6px; 
+  }
+  .legend-color { 
+    width: 13px; 
+    height: 13px; 
+  }
+  .legend-percent { 
+    font-size: 13px !important; 
+  }
+  .legend-list { 
+    gap: 8px 18px; 
+    padding-top: 10px;
+  }
   
   .transaction-form { padding: 10px; }
   .transaction-form h3 { font-size: 0.8rem; margin-bottom: 6px; }
@@ -460,14 +476,29 @@ h1::before { content: '✨ '; }
   .pie-toggle button { font-size: 0.6rem; padding: 3px 8px; }
   
   .pie-container .recharts-wrapper {
-    transform: scale(0.45);
+    transform: scale(0.60);
     transform-origin: center center;
   }
   
-  .legend-item { font-size: 10px; gap: 2px; }
-  .legend-color { width: 8px; height: 8px; }
-  .legend-percent { font-size: 9px; }
-  .legend-list { gap: 3px 8px; }
+  /* 小屏手机图例也调大 */
+  .pie-container {
+    padding: 6px 0 12px 0;
+  }
+  .legend-item { 
+    font-size: 13px !important; 
+    gap: 5px; 
+  }
+  .legend-color { 
+    width: 12px; 
+    height: 12px; 
+  }
+  .legend-percent { 
+    font-size: 12px !important; 
+  }
+  .legend-list { 
+    gap: 6px 14px; 
+    padding-top: 8px;
+  }
   
   .toolbar input[type="month"] { font-size: 0.6rem; min-width: 70px; }
   .toolbar label { font-size: 0.6rem; }
@@ -488,7 +519,7 @@ h1::before { content: '✨ '; }
 @media (min-width: 768px) and (max-width: 1024px) {
   .pie-wrapper { max-width: 340px; }
   .pie-container .recharts-wrapper {
-    transform: scale(0.65);
+    transform: scale(0.80);
     transform-origin: center center;
   }
 }

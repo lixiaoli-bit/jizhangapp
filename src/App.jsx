@@ -172,13 +172,13 @@ function App() {
             
             {currentPieData.length > 0 ? (
               <div className="pie-container">
-                <PieChart width={280} height={280}>
+                <PieChart width={200} height={200}>
                   <Pie 
                     data={currentPieData} 
                     cx="50%" 
                     cy="50%" 
-                    innerRadius={50} 
-                    outerRadius={100} 
+                    innerRadius={30} 
+                    outerRadius={70} 
                     dataKey="value"
                   >
                     {currentPieData.map((_, index) => (
