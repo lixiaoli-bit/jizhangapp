@@ -387,7 +387,7 @@ h1::before { content: '✨ '; }
 .empty { text-align: center; color: #b5a8c4; padding: 20px 0; font-size: 0.9rem; }
 
 /* ============================================================
-   手机适配（宽度 < 768px）- 整体缩放 0.92
+   手机适配（宽度 < 768px）- 备用方案：scale + 宽度补偿
    ============================================================ */
 @media (max-width: 768px) {
   body { padding: 4px; }
@@ -396,6 +396,7 @@ h1::before { content: '✨ '; }
     border-radius: 16px;
     transform: scale(0.92);
     transform-origin: top center;
+    width: 108.7%;  /* 1 / 0.92 ≈ 108.7%，补偿缩放后的空白 */
   }
   h1 { font-size: 1.2rem; }
   
@@ -439,13 +440,14 @@ h1::before { content: '✨ '; }
 }
 
 /* ============================================================
-   小屏手机（宽度 < 420px）- 整体缩放 0.88
+   小屏手机（宽度 < 420px）- 备用方案：scale + 宽度补偿
    ============================================================ */
 @media (max-width: 420px) {
   .app { 
     transform: scale(0.88);
     transform-origin: top center;
     padding: 10px;
+    width: 113.6%;  /* 1 / 0.88 ≈ 113.6% */
   }
   .stats { grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
   .stat-card .value { font-size: 0.8rem; }
