@@ -1,0 +1,380 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+  font-family: system-ui, -apple-system, sans-serif; 
+  min-height: 100vh;
+  background: linear-gradient(145deg, #eef3f7 0%, #f5edf5 100%);
+  padding: 12px;
+}
+
+.app { 
+  max-width: 1200px; 
+  margin: 0 auto; 
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 20px; 
+  border-radius: 20px; 
+  box-shadow: 0 8px 32px rgba(150, 150, 180, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+h1 { 
+  color: #5b4a7a;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+h1::before { content: '✨ '; }
+
+.toolbar { 
+  display: flex; 
+  gap: 10px; 
+  flex-wrap: wrap; 
+  align-items: center; 
+  margin: 10px 0 14px 0;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.toolbar input[type="month"] { 
+  padding: 6px 12px; 
+  border: 1px solid #d5cde6; 
+  border-radius: 10px; 
+  background: white;
+  font-size: 0.85rem;
+  color: #4a3a5e;
+  flex: 1;
+  min-width: 120px;
+}
+.toolbar input[type="month"]:focus {
+  outline: none;
+  border-color: #b8a5d6;
+  box-shadow: 0 0 0 3px rgba(184, 165, 214, 0.15);
+}
+.toolbar label { 
+  display: flex; 
+  align-items: center; 
+  gap: 6px; 
+  font-weight: 500;
+  color: #5b4a7a;
+  font-size: 0.85rem;
+}
+.toolbar input[type="number"] {
+  width: 80px;
+  padding: 6px 10px;
+  border: 1px solid #d5cde6;
+  border-radius: 10px;
+  background: white;
+  color: #4a3a5e;
+}
+.toolbar input[type="number"]:focus {
+  outline: none;
+  border-color: #b8a5d6;
+  box-shadow: 0 0 0 3px rgba(184, 165, 214, 0.15);
+}
+.toolbar button { 
+  padding: 6px 16px; 
+  background: linear-gradient(135deg, #b8a5d6, #9b8abf);
+  color: white; 
+  border: none; 
+  border-radius: 10px; 
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(155, 138, 191, 0.2);
+}
+.toolbar button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(155, 138, 191, 0.3);
+}
+.toolbar button:active {
+  transform: scale(0.97);
+}
+
+.stats { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; 
+  margin: 10px 0 14px 0;
+}
+.stat-card { 
+  padding: 12px 14px; 
+  border-radius: 14px; 
+  text-align: center;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 2px 12px rgba(150, 150, 180, 0.05);
+  transition: all 0.25s;
+}
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(150, 150, 180, 0.1);
+}
+.stat-card .label { 
+  display: block; 
+  font-size: 0.7rem; 
+  color: #8a7a9e; 
+  margin-bottom: 2px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.stat-card .value { 
+  font-size: 1.2rem; 
+  font-weight: 700; 
+  color: #3d2e52;
+}
+.stat-card.income { 
+  background: rgba(232, 248, 235, 0.7); 
+  border-color: rgba(168, 196, 184, 0.4);
+}
+.stat-card.income .value { color: #5B8A6F; }
+.stat-card.expense { 
+  background: rgba(255, 240, 240, 0.7); 
+  border-color: rgba(212, 165, 165, 0.4);
+}
+.stat-card.expense .value { color: #C47A7A; }
+.stat-card.balance { 
+  background: rgba(240, 242, 255, 0.7); 
+  border-color: rgba(139, 163, 196, 0.4);
+}
+.stat-card.balance .value { color: #6A8BAE; }
+
+.alert { 
+  background: linear-gradient(135deg, #fce4e4, #f8d7d7);
+  color: #b71c1c; 
+  padding: 10px 16px; 
+  border-radius: 12px; 
+  margin: 8px 0 14px 0; 
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: 1px solid rgba(212, 165, 165, 0.3);
+  box-shadow: 0 2px 12px rgba(212, 165, 165, 0.08);
+  animation: pulseAlert 2s infinite;
+}
+@keyframes pulseAlert {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+.dashboard { 
+  display: flex; 
+  flex-direction: column;
+  gap: 16px; 
+  margin: 14px 0; 
+}
+.chart-area { 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 12px;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.pie-wrapper {
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  max-width: 320px;
+  width: 100%;
+}
+.pie-wrapper .recharts-responsive-container {
+  width: 100% !important;
+  height: 240px !important;
+}
+.pie-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+}
+.income-title { color: #5B8A6F; }
+.expense-title { color: #C47A7A; }
+.empty-chart {
+  color: #b5a8c4;
+  padding: 40px 0;
+  font-size: 0.85rem;
+}
+
+.form-area { 
+  width: 100%;
+}
+.transaction-form { 
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  padding: 16px; 
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.transaction-form h3 { 
+  margin-bottom: 12px; 
+  color: #4a3a5e;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.form-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.form-row input, .form-row select { 
+  flex: 1; 
+  min-width: 80px; 
+  padding: 8px 12px; 
+  border: 1px solid #ddd0e8; 
+  border-radius: 10px;
+  background: white;
+  font-size: 0.85rem;
+  color: #3d2e52;
+  transition: all 0.2s;
+}
+.form-row input:focus, .form-row select:focus {
+  outline: none;
+  border-color: #b8a5d6;
+  box-shadow: 0 0 0 3px rgba(184, 165, 214, 0.12);
+}
+.form-row input::placeholder { color: #c5b8d0; }
+.form-row button { 
+  padding: 8px 18px; 
+  background: linear-gradient(135deg, #b8a5d6, #9b8abf);
+  color: white; 
+  border: none; 
+  border-radius: 10px; 
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(155, 138, 191, 0.15);
+}
+.form-row button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(155, 138, 191, 0.25);
+}
+.form-row button[type="button"] { 
+  background: #d5cde6; 
+  box-shadow: none;
+}
+.form-row button[type="button"]:hover {
+  background: #c8bddb;
+  transform: none;
+}
+
+.list { margin-top: 16px; }
+.day-group { 
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  padding: 10px 14px; 
+  border-radius: 12px; 
+  margin-bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.day-group h4 { 
+  margin-bottom: 8px; 
+  color: #6a5a7e;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  padding-bottom: 6px;
+}
+.transaction-item { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 6px 10px; 
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px; 
+  margin-bottom: 4px; 
+  border-left: 3px solid; 
+  font-size: 0.8rem;
+  transition: all 0.15s;
+}
+.transaction-item:hover { 
+  background: rgba(255, 255, 255, 0.85);
+}
+.transaction-item span { color: #3d2e52; }
+.transaction-item span:last-of-type { font-weight: 600; }
+.transaction-item button { 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  margin-left: 4px; 
+  font-size: 14px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.transaction-item button:hover { background: rgba(0,0,0,0.05); }
+
+.empty { text-align: center; color: #b5a8c4; padding: 20px 0; font-size: 0.9rem; }
+
+/* ============================================================
+   手机适配（宽度 < 768px）
+   ============================================================ */
+@media (max-width: 768px) {
+  body { padding: 8px; }
+  .app { padding: 12px; border-radius: 16px; }
+  h1 { font-size: 1.2rem; }
+  
+  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .stat-card { padding: 8px 6px; border-radius: 10px; }
+  .stat-card .value { font-size: 0.95rem; }
+  .stat-card .label { font-size: 0.6rem; }
+  
+  .toolbar { padding: 10px 12px; gap: 6px; }
+  .toolbar input[type="month"] { font-size: 0.75rem; padding: 4px 8px; min-width: 100px; }
+  .toolbar label { font-size: 0.75rem; }
+  .toolbar input[type="number"] { width: 60px; padding: 4px 6px; font-size: 0.75rem; }
+  .toolbar button { font-size: 0.7rem; padding: 4px 12px; }
+  
+  .chart-area { padding: 8px; gap: 6px; }
+  .pie-wrapper { min-width: 140px; max-width: 100%; }
+  .pie-wrapper .recharts-responsive-container { height: 200px !important; }
+  .pie-title { font-size: 0.75rem; }
+  .empty-chart { padding: 20px 0; font-size: 0.75rem; }
+  
+  .transaction-form { padding: 12px; }
+  .transaction-form h3 { font-size: 0.85rem; margin-bottom: 8px; }
+  .form-row input, .form-row select { font-size: 0.75rem; padding: 6px 8px; min-width: 60px; }
+  .form-row button { font-size: 0.75rem; padding: 6px 12px; }
+  
+  .day-group { padding: 8px 10px; }
+  .day-group h4 { font-size: 0.7rem; }
+  .transaction-item { font-size: 0.7rem; padding: 4px 8px; }
+  .transaction-item button { font-size: 12px; }
+}
+
+/* ============================================================
+   小屏手机（宽度 < 420px）
+   ============================================================ */
+@media (max-width: 420px) {
+  .stats { grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+  .stat-card .value { font-size: 0.8rem; }
+  .stat-card .label { font-size: 0.55rem; }
+  
+  .pie-wrapper { min-width: 120px; max-width: 100%; }
+  .pie-wrapper .recharts-responsive-container { height: 160px !important; }
+  .pie-title { font-size: 0.65rem; }
+  
+  .toolbar input[type="month"] { font-size: 0.65rem; min-width: 80px; }
+  .toolbar label { font-size: 0.65rem; }
+  .toolbar input[type="number"] { width: 50px; font-size: 0.65rem; }
+  .toolbar button { font-size: 0.6rem; padding: 3px 8px; }
+  
+  .form-row input, .form-row select { font-size: 0.65rem; padding: 4px 6px; min-width: 50px; }
+  .form-row button { font-size: 0.65rem; padding: 4px 10px; }
+  
+  .transaction-item { font-size: 0.6rem; padding: 3px 6px; flex-wrap: wrap; gap: 2px; }
+  .transaction-item button { font-size: 10px; }
+  .day-group h4 { font-size: 0.6rem; }
+}
+
+/* ============================================================
+   平板（宽度 768px - 1024px）
+   ============================================================ */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .pie-wrapper { max-width: 260px; }
+  .pie-wrapper .recharts-responsive-container { height: 220px !important; }
+}
