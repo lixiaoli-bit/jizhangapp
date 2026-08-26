@@ -3,15 +3,22 @@ import dayjs from 'dayjs'
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
 import './App.css'
 
-// ====== 预设分类 ======
-const CATEGORIES = ['餐饮', '交通', '购物', '工资', '娱乐', '投资', '其他']
+// ====== 默认分类 ======
+const DEFAULT_CATEGORIES = ['餐饮', '交通', '购物', '工资', '娱乐', '投资', '其他']
 
-// ====== 柔雾莫兰迪色系 ======
-const COLORS = [
-  '#8BA3C4', '#D4A5A5', '#E8C9A0', '#A8C4B8', '#C5B4D4', '#D4B5B5', '#F0C4A8'
-]
+// ====== 每个分类固定颜色 ======
+const CATEGORY_COLORS = {
+  '餐饮': '#D4A5A5',
+  '交通': '#A8C4B8',
+  '购物': '#E8C9A0',
+  '工资': '#8BA3C4',
+  '娱乐': '#C5B4D4',
+  '投资': '#F0C4A8',
+  '其他': '#D4B5B5',
+}
 
 function App() {
+  // ---------- 核心状态 ----------
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem('transactions')
     return saved ? JSON.parse(saved) : []
@@ -24,6 +31,15 @@ function App() {
   })
   const [pieMode, setPieMode] = useState('income')
 
+  // ---------- 可编辑分类 ----------
+  const [categories, setCategories] = useState(() => {
+    const saved = localStorage.getItem('categories')
+    return saved ? JSON.parse(saved) : DEFAULT_CATEGORIES
+  })
+  const [showCategoryManager, setShowCategoryManager] = useState(false)
+  const [newCategory, setNewCategory] = useState('')
+
+  // ---------- 自动持久化 ----------
   useEffect(() => {
     localStorage.setItem('transactions', JSON.stringify(transactions))
   }, [transactions])
@@ -32,6 +48,11 @@ function App() {
     localStorage.setItem('budget', String(budget))
   }, [budget])
 
+  useEffect(() => {
+    localStorage.setItem('categories', JSON.stringify(categories))
+  }, [categories])
+
+  // ---------- 增删改函数 ----------
   const addTransaction = (newRecord) => {
     setTransactions(prev => [...prev, { ...newRecord, id: Date.now() }])
   }
@@ -48,10 +69,42 @@ function App() {
     ))
   }
 
+  // ---------- 分类管理函数 ----------
+  const addCategory = () => {
+    const trimmed = newCategory.trim()
+    if (!trimmed) return alert('请输入分类名称')
+    if (categories.includes(trimmed)) return alert('分类已存在')
+    setCategories([...categories, trimmed])
+    setNewCategory('')
+  }
+
+  const deleteCategory = (cat) => {
+    const used = transactions.some(t => t.category === cat)
+    if (used) {
+      if (!confirm(`分类「${cat}」已被交易使用，删除后这些交易的分类将变为「其他」，确定删除吗？`)) return
+      setTransactions(prev => prev.map(t => 
+        t.category === cat ? { ...t, category: '其他' } : t
+      ))
+    }
+    setCategories(prev => prev.filter(c => c !== cat))
+  }
+
+  const renameCategory = (oldName, newName) => {
+    const trimmed = newName.trim()
+    if (!trimmed) return alert('请输入新名称')
+    if (categories.includes(trimmed) && trimmed !== oldName) return alert('分类已存在')
+    setTransactions(prev => prev.map(t => 
+      t.category === oldName ? { ...t, category: trimmed } : t
+    ))
+    setCategories(prev => prev.map(c => c === oldName ? trimmed : c))
+  }
+
+  // ---------- 月度数据过滤 ----------
   const monthData = useMemo(() => {
     return transactions.filter(t => dayjs(t.date).format('YYYY-MM') === month)
   }, [transactions, month])
 
+  // ---------- 统计计算 ----------
   const { totalIncome, totalExpense, balance, incomePieData, expensePieData } = useMemo(() => {
     let income = 0, expense = 0
     const incomeMap = {}
@@ -104,10 +157,10 @@ function App() {
     return (
       <ul className="legend-list">
         {payload.map((entry, index) => {
-          const percent = ((entry.payload.value / total) * 100).toFixed(1)
+          const percent = total > 0 ? ((entry.payload.value / total) * 100).toFixed(1) : 0
           return (
             <li key={`item-${index}`} className="legend-item">
-              <span className="legend-color" style={{ backgroundColor: entry.color }}></span>
+              <span className="legend-color" style={{ backgroundColor: CATEGORY_COLORS[entry.value] || '#D4B5B5' }}></span>
               <span className="legend-name">{entry.value}</span>
               <span className="legend-percent">{percent}%</span>
             </li>
@@ -127,7 +180,55 @@ function App() {
           <input type="number" value={budget} onChange={e => setBudget(Number(e.target.value))} />
         </label>
         <button onClick={exportCSV}>📥 导出CSV</button>
+        <button className="manage-cat-btn" onClick={() => setShowCategoryManager(!showCategoryManager)}>
+          ⚙️ 分类
+        </button>
       </div>
+
+      {/* 分类管理面板 */}
+      {showCategoryManager && (
+        <div className="category-manager">
+          <h4>📂 管理分类</h4>
+          <div className="cat-add-row">
+            <input 
+              type="text" 
+              placeholder="输入新分类名称" 
+              value={newCategory} 
+              onChange={e => setNewCategory(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && addCategory()}
+            />
+            <button onClick={addCategory}>➕ 添加</button>
+          </div>
+          <div className="cat-list">
+            {categories.map(cat => (
+              <div key={cat} className="cat-item">
+                <span className="cat-dot" style={{ backgroundColor: CATEGORY_COLORS[cat] || '#D4B5B5' }}></span>
+                <span>{cat}</span>
+                <div>
+                  <button 
+                    className="cat-rename-btn"
+                    onClick={() => {
+                      const newName = prompt(`将「${cat}」重命名为：`, cat)
+                      if (newName && newName.trim() !== cat) {
+                        renameCategory(cat, newName.trim())
+                      }
+                    }}
+                  >
+                    ✏️
+                  </button>
+                  <button 
+                    className="cat-delete-btn"
+                    onClick={() => deleteCategory(cat)}
+                  >
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="cat-hint">💡 删除已被使用的分类时，相关交易会自动改为「其他」</p>
+        </div>
+      )}
 
       <div className="stats">
         <div className="stat-card income">
@@ -181,11 +282,14 @@ function App() {
                     outerRadius={70} 
                     dataKey="value"
                   >
-                    {currentPieData.map((_, index) => (
-                      <Cell key={`pie-${index}`} fill={COLORS[index % COLORS.length]} />
+                    {currentPieData.map((entry, index) => (
+                      <Cell 
+                        key={`pie-${index}`} 
+                        fill={CATEGORY_COLORS[entry.name] || '#D4B5B5'} 
+                      />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(value) => `¥${value.toFixed(2)}`} />
+                  <Tooltip formatter={(value) => `¥${Number(value).toFixed(2)}`} />
                   <Legend 
                     content={renderLegend(currentPieData)}
                     wrapperStyle={{ width: '100%' }}
@@ -207,6 +311,7 @@ function App() {
             transactions={transactions}
             onUpdate={updateTransaction}
             onCancelEdit={() => setEditingId(null)}
+            categories={categories}
           />
         </div>
       </div>
@@ -221,10 +326,10 @@ function App() {
 }
 
 // ====== 表单组件 ======
-function TransactionForm({ onAdd, editingId, transactions, onUpdate, onCancelEdit }) {
-  const [type, setType] = useState('支出')
+function TransactionForm({ onAdd, editingId, transactions, onUpdate, onCancelEdit, categories }) {
+  const [type, setType] = useState('收入')
   const [amount, setAmount] = useState('')
-  const [category, setCategory] = useState(CATEGORIES[0])
+  const [category, setCategory] = useState(categories[0] || '')
   const [desc, setDesc] = useState('')
   const [date, setDate] = useState(dayjs().format('YYYY-MM-DD'))
 
@@ -242,6 +347,7 @@ function TransactionForm({ onAdd, editingId, transactions, onUpdate, onCancelEdi
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!amount || Number(amount) <= 0) return alert('请输入有效金额')
+    if (!category) return alert('请选择分类')
     
     const record = { type, amount: Number(amount), category, desc, date }
     if (editingId) {
@@ -268,7 +374,7 @@ function TransactionForm({ onAdd, editingId, transactions, onUpdate, onCancelEdi
       </div>
       <div className="form-row">
         <select value={category} onChange={e => setCategory(e.target.value)}>
-          {CATEGORIES.map(c => <option key={c}>{c}</option>)}
+          {categories.map(c => <option key={c}>{c}</option>)}
         </select>
         <input type="text" placeholder="描述（可选）" value={desc} onChange={e => setDesc(e.target.value)} />
       </div>
@@ -298,7 +404,7 @@ function TransactionList({ data, onDelete, onEdit }) {
         <div key={date} className="day-group">
           <h4>{date}  (共{items.reduce((s, i) => s + Number(i.amount), 0).toFixed(2)}元)</h4>
           {items.map(item => (
-            <div key={item.id} className="transaction-item" style={{ borderLeftColor: item.type === '收入' ? '#A8C4B8' : '#D4A5A5' }}>
+            <div key={item.id} className="transaction-item" style={{ borderLeftColor: CATEGORY_COLORS[item.category] || '#D4B5B5' }}>
               <span>{item.category}</span>
               <span>{item.desc}</span>
               <span style={{ color: item.type === '收入' ? '#5B8A6F' : '#C47A7A', fontWeight: 600 }}>
